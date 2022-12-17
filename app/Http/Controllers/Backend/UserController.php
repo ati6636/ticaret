@@ -21,9 +21,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->is_admin = $request->is_admin == 'on' ? 1 : 0;
-        $request->is_active = $request->is_active == 'on' ? 1 : 0;
-
         $user = new User();
 
         $user->name = $request->name;
@@ -42,12 +39,24 @@ class UserController extends Controller
     }
     public function edit($id)
     {
-        return 'edit';
+        $user = User::find($id);
+        return view('backend.users.update_form',compact('user'));
     }
 
     public function update(Request $request, $id)
     {
-        return 'update';
+        $request->is_admin = $request->is_admin == 1 ? 1 : 0;
+        $request->is_active = $request->is_active == 1 ? 1 : 0;
+
+        $user = User::find($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->is_admin = $request->is_admin;
+        $user->is_active = $request->is_active;
+
+        $user->save();
+        return redirect('/users');
     }
     public function destroy($id)
     {

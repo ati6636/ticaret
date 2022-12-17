@@ -56,34 +56,25 @@
                 <h1 class="h2">Kullanıcılar</h1>
             </div>
 
-            <h4>Yeni Kullanıcı Ekle</h4>
+            <h4>Kullanıcı Düzenle</h4>
             <div class="table-responsive overflow-hidden">
-                <form action="/users" method="post">
+                <form action="{{url("/users/$user->user_id")}}" method="post">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="name" class="form-label">Adı ve Soyadı</label>
-                            <input type="text" class="form-control" id="name" name="name"
+                            <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}"
                                    placeholder="Adı ve Soyadı Giriniz">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">E-Mail</label>
-                            <input type="email" class="form-control" id="email" name="email"
+                            <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}"
                                    placeholder="E-Mail Giriniz">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="password" class="form-label">Şifre</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                   placeholder="Şifre Giriniz">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="password2" class="form-label">Şifre Tekrarı</label>
-                            <input type="password" class="form-control" id="password2" name="password2"
-                                   placeholder="Şifrenizi Tekrar Giriniz">
-                        </div>
-                        <div class="col-md-6 mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="is_admin" name="is_admin">
+                                <input class="form-check-input" type="checkbox" value="1" {{$user->is_admin == 1 ? 'checked' : ''}} id="is_admin" name="is_admin">
                                 <label class="form-check-label" for="is_admin">
                                     Yetkili Kullanıcı
                                 </label>
@@ -91,7 +82,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="is_active" name="is_active">
+                                <input class="form-check-input" type="checkbox" value="1" {{$user->is_admin == 1 ? 'checked' : ''}} id="is_active" name="is_active">
                                 <label class="form-check-label" for="is_active">
                                     Aktif Kullanıcı
                                 </label>
@@ -100,7 +91,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <button type="submit" class="btn btn-md btn-success "><i class="fa-solid fa-floppy-disk"></i> Kaydet</button>
+                            <button type="submit" class="btn btn-md btn-success "><i class="fa-solid fa-file-pen"></i> Güncelle</button>
                         </div>
                     </div>
                 </form>

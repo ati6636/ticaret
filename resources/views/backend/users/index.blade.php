@@ -133,7 +133,13 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>{{$user->is_active}}</td>
+                                <td>
+                                    @if($user->is_active == 1)
+                                        <span class="badge rounded-pill text-bg-success">Aktif</span>
+                                    @else
+                                        <span class="badge rounded-pill text-bg-danger">Pasif</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <ul class="nav float-start">
                                         <li class="nav-link">

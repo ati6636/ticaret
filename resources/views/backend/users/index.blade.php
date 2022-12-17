@@ -88,15 +88,16 @@
             <div class="position-sticky pt-3 sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            <span data-feather="home" class="align-text-bottom"></span>
-                            Kullanıcılar
+                        <a class="nav-link {{\Illuminate\Support\Str::of(url()->current())->contains("/users") ? "active" : ""}}"
+                           aria-current="page" href="#">
+                            <span class="align-text-bottom"><i class="fas fa-home-user"></i></span>
+                            Yönetim Paneli
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file" class="align-text-bottom"></span>
-                            Orders
+                        <a class="nav-link" href="/users">
+                            <span class="align-text-bottom"><i class="fas fa-users"></i></span>
+                            Kullanıcılar
                         </a>
                     </li>
                 </ul>
@@ -109,12 +110,11 @@
                 <h1 class="h2">Kullanıcılar</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group me-2">
-
+                        <a href="/users/create" class="btn btn-sm btn-outline-danger">Yeni Ekle</a>
                     </div>
                 </div>
             </div>
 
-            <h2>Section title</h2>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -134,8 +134,31 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->is_active}}</td>
-                                <td >
-                                    Güncelle - Sil - Şifre Değiştir
+                                <td>
+                                    <ul class="nav float-start">
+                                        <li class="nav-link">
+                                            <a href="{{url("/users/$user->user_id/edit")}}" class="nav-link text-black">
+                                                <i class="fa-solid fa-file-pen"></i>
+                                                <span>Güncelle</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav float-start">
+                                        <li class="nav-link">
+                                            <a href="{{url("/users/$user->user_id")}}" class="nav-link list-item-delete">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                                <span>Sil</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav float-start">
+                                        <li class="nav-link">
+                                            <a href="{{url("/users/$user->user_id")}}" class="nav-link">
+                                                <i class="fa-solid fa-unlock"></i>
+                                                <spab>Şifre Değiştir</spab>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                         @endforeach

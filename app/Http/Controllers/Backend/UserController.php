@@ -29,15 +29,8 @@ class UserController extends Controller
 
     public function store(UserRequest $request, User $user)
     {
-        $request->is_admin = $request->is_admin == 1 ? 1 : 0;
-        $request->is_active = $request->is_active == 1 ? 1 : 0;
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->is_admin = $request->is_admin;
-        $user->is_active = $request->is_active;
-
+        $data = $this->prepare($request,$user->getFillable());
+        $user->fill($data);
         $user->save();
         return redirect($this->returnUrl);
     }
@@ -48,15 +41,8 @@ class UserController extends Controller
 
     public function update(UserRequest $request, User $user)
     {
-        $request->is_admin = $request->is_admin == 1 ? 1 : 0;
-        $request->is_active = $request->is_active == 1 ? 1 : 0;
-
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->is_admin = $request->is_admin;
-        $user->is_active = $request->is_active;
-
+        $data = $this->prepare($request,$user->getFillable());
+        $user->fill($data);
         $user->save();
         return redirect($this->returnUrl);
     }
@@ -72,7 +58,8 @@ class UserController extends Controller
     }
     public function passwordPassword(UserRequest $request, User $user)
     {
-        $user->password = Hash::make($request->password);
+        $data = $this->prepare($request,$user->getFillable());
+        $user->fill($data);
         $user->save();
         return redirect($this->returnUrl);
     }

@@ -13,4 +13,17 @@ class Controller extends BaseController
 
     private $returnUrl;
     public $fileRepo;
+
+    public function prepare($request, $fillables)
+    {
+        $data = array();
+        foreach ($fillables as $fillable)
+        {
+            if ($request->has($fillable))
+            {
+                $data[$fillable] = $request->$fillable;
+            }
+        }
+        return $data;
+    }
 }

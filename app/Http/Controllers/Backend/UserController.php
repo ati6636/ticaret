@@ -21,6 +21,9 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $request->is_admin = $request->is_admin == 1 ? 1 : 0;
+        $request->is_active = $request->is_active == 1 ? 1 : 0;
+
         $user = new User();
 
         $user->name = $request->name;
@@ -60,6 +63,9 @@ class UserController extends Controller
     }
     public function destroy($id)
     {
-        return 'destroy';
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/users');
+
     }
 }

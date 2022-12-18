@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ticaret E-Commerce</title>
 
-    @vite(['resources/js/app.js','resources/sass/app.scss'])
+    @vite(['resources/js/app.js'])
 
     <style>
         .bd-placeholder-img {
@@ -88,7 +88,7 @@
             <div class="position-sticky pt-3 sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link {{\Illuminate\Support\Str::of(url()->current())->contains("/users") ? "active" : ""}}"
+                        <a class="nav-link {{Str::of(url()->current())->contains("/users") ? "active" : ""}}"
                            aria-current="page" href="#">
                             <span class="align-text-bottom"><i class="fas fa-home-user"></i></span>
                             Yönetim Paneli
@@ -129,7 +129,7 @@
                     <tbody>
                     @if(count($users) > 0)
                         @foreach($users as $user)
-                            <tr>
+                            <tr id="{{$user->user_id}}">
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
@@ -143,7 +143,7 @@
                                 <td>
                                     <ul class="nav float-start">
                                         <li class="nav-link">
-                                            <a href="{{url("/users/$user->user_id/edit")}}" class="nav-link text-black">
+                                            <a href="{{url("/users/$user->user_id/edit")}}" class="btn btn-outline-primary">
                                                 <i class="fa-solid fa-file-pen"></i>
                                                 <span>Güncelle</span>
                                             </a>
@@ -151,15 +151,19 @@
                                     </ul>
                                     <ul class="nav float-start">
                                         <li class="nav-link">
-                                            <a href="{{url("/users/$user->user_id")}}" class="nav-link list-item-delete">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                                <span>Sil</span>
-                                            </a>
+                                            <form action="{{url("/users/$user->user_id")}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button href="{{url("/users/$user->user_id")}}" onclick="return confirm('Bu Kaydı Silmek İstediğinize Emin misiniz?')" class="btn btn-outline-danger">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                    <span>Sil</span>
+                                                </button>
+                                            </form>
                                         </li>
                                     </ul>
                                     <ul class="nav float-start">
                                         <li class="nav-link">
-                                            <a href="{{url("/users/$user->user_id")}}" class="nav-link">
+                                            <a href="{{url("/users/$user->user_id")}}" class="btn btn-outline-secondary">
                                                 <i class="fa-solid fa-unlock"></i>
                                                 <spab>Şifre Değiştir</spab>
                                             </a>
@@ -181,6 +185,5 @@
         </main>
     </div>
 </div>
-
 </body>
 </html>

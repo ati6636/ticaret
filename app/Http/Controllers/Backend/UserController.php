@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->returnUrl = '/users';
+    }
+
     public function index()
     {
         $users = User::all();
@@ -22,12 +27,10 @@ class UserController extends Controller
         return view('backend.users.insert_form');
     }
 
-    public function store(UserRequest $request)
+    public function store(UserRequest $request, User $user)
     {
         $request->is_admin = $request->is_admin == 1 ? 1 : 0;
         $request->is_active = $request->is_active == 1 ? 1 : 0;
-
-        $user = new User();
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -36,25 +39,18 @@ class UserController extends Controller
         $user->is_active = $request->is_active;
 
         $user->save();
-        return redirect('/users');
+        return redirect($this->returnUrl);
     }
-
-    public function show($id)
+    public function edit(User $user)
     {
-        return 'show';
-    }
-    public function edit($id)
-    {
-        $user = User::find($id);
         return view('backend.users.update_form',compact('user'));
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(UserRequest $request, User $user)
     {
         $request->is_admin = $request->is_admin == 1 ? 1 : 0;
         $request->is_active = $request->is_active == 1 ? 1 : 0;
 
-        $user = User::find($id);
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -62,13 +58,12 @@ class UserController extends Controller
         $user->is_active = $request->is_active;
 
         $user->save();
-        return redirect('/users');
+        return redirect($this->returnUrl);
     }
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::find($id);
         $user->delete();
-        return redirect('/users');
+        return redirect($this->returnUrl);
 
     }
     public function passwordForm(User $user)
@@ -79,6 +74,6 @@ class UserController extends Controller
     {
         $user->password = Hash::make($request->password);
         $user->save();
-        return redirect('/users');
+        return redirect($this->returnUrl);
     }
 }

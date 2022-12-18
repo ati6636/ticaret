@@ -54,38 +54,12 @@
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Kullanıcılar</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
-                        <a href="/users" class="btn btn-sm btn-outline-dark"><i class="fa-solid fa-arrow-left"></i> Geri</a>
-                    </div>
-                </div>
-
             </div>
 
-            <h4>Yeni Kullanıcı Ekle</h4>
+            <h4>Şifre Değiştirme Formu</h4>
             <div class="table-responsive overflow-hidden">
-                <form action="/users" method="post">
+                <form action="{{url("/users/$user->user_id/change-password")}}" method="post">
                     @csrf
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="name" class="form-label">Adı ve Soyadı</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                   value="{{old("name")}}"
-                                   placeholder="Adı ve Soyadı Giriniz">
-                            @error('name')
-                            <span class="text-bg-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="email" class="form-label">E-Mail</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                   value="{{old("email")}}"
-                                   placeholder="E-Mail Giriniz">
-                            @error('email')
-                            <span class="text-bg-danger">{{$message}}</span>
-                            @enderror
-
-                        </div>
                         <div class="col-md-6 mb-3">
                             <label for="password" class="form-label">Şifre</label>
                             <input type="password" class="form-control" id="password" name="password"
@@ -104,23 +78,6 @@
                             <span class="text-bg-danger">{{$message}}</span>
                             @enderror
 
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="is_admin" name="is_admin"
-                                <label class="form-check-label" for="is_admin">
-                                    Yetkili Kullanıcı
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="is_active"
-                                       name="is_active">
-                                <label class="form-check-label" for="is_active">
-                                    Aktif Kullanıcı
-                                </label>
-                            </div>
                         </div>
                     </div>
                     <div class="row">

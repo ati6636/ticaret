@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -29,7 +31,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->is_admin = $request->is_admin;
         $user->is_active = $request->is_active;
 
@@ -68,5 +70,15 @@ class UserController extends Controller
         $user->delete();
         return redirect('/users');
 
+    }
+    public function passwordForm(User $user)
+    {
+        return view('backend.users.password_form',compact('user'));
+    }
+    public function passwordPassword(UserRequest $request, User $user)
+    {
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/users');
     }
 }

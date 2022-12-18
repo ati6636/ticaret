@@ -166,7 +166,7 @@
                                     </ul>
                                     <ul class="nav float-start">
                                         <li class="nav-link">
-                                            <a href="{{url("/users/$user->user_id")}}"
+                                            <a href="{{url("/users/$user->user_id/change-password")}}"
                                                class="btn btn-sm btn-outline-secondary">
                                                 <i class="fa-solid fa-unlock"></i>
                                                 <spab>Şifre Değiştir</spab>

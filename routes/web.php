@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('/users', UserController::class);
+
+Route::get('/users/{user}/change-password', [UserController::class,'passwordForm']);
+Route::post('/users/{user}/change-password', [UserController::class,'passwordPassword']);

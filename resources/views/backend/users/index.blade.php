@@ -143,7 +143,8 @@
                                 <td>
                                     <ul class="nav float-start">
                                         <li class="nav-link">
-                                            <a href="{{url("/users/$user->user_id/edit")}}" class="btn btn-outline-primary">
+                                            <a href="{{url("/users/$user->user_id/edit")}}"
+                                               class="btn btn-sm btn-outline-primary">
                                                 <i class="fa-solid fa-file-pen"></i>
                                                 <span>Güncelle</span>
                                             </a>
@@ -154,7 +155,9 @@
                                             <form action="{{url("/users/$user->user_id")}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button href="{{url("/users/$user->user_id")}}" onclick="return confirm('Bu Kaydı Silmek İstediğinize Emin misiniz?')" class="btn btn-outline-danger">
+                                                <button href="{{url("/users/$user->user_id")}}"
+                                                        onclick="return confirm('Bu Kaydı Silmek İstediğinize Emin misiniz?')"
+                                                        class="btn btn-sm btn-outline-danger">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                     <span>Sil</span>
                                                 </button>
@@ -163,7 +166,8 @@
                                     </ul>
                                     <ul class="nav float-start">
                                         <li class="nav-link">
-                                            <a href="{{url("/users/$user->user_id")}}" class="btn btn-outline-secondary">
+                                            <a href="{{url("/users/$user->user_id")}}"
+                                               class="btn btn-sm btn-outline-secondary">
                                                 <i class="fa-solid fa-unlock"></i>
                                                 <spab>Şifre Değiştir</spab>
                                             </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class UserController extends Controller
         return view('backend.users.insert_form');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $request->is_admin = $request->is_admin == 1 ? 1 : 0;
         $request->is_active = $request->is_active == 1 ? 1 : 0;
@@ -46,7 +47,7 @@ class UserController extends Controller
         return view('backend.users.update_form',compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $request->is_admin = $request->is_admin == 1 ? 1 : 0;
         $request->is_active = $request->is_active == 1 ? 1 : 0;

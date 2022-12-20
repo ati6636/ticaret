@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    private $returnUrl;
+    public $returnUrl;
     public $fileRepo;
 
     public function prepare($request, $fillables)

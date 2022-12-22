@@ -9,59 +9,27 @@
         @csrf
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="name" class="form-label">Adı ve Soyadı</label>
-                <input type="text" class="form-control" id="name" name="name"
-                       value="{{old("name")}}"
-                       placeholder="Adı ve Soyadı Giriniz">
-                @error('name')
-                <span class="text-bg-danger">{{$message}}</span>
-                @enderror
+                <x-input label="Adı ve Soyadı" placeholder="Adı ve Soyadı Giriniz" field="name"/>
             </div>
-            <div class="col-md-6 mb-3">
-                <label for="email" class="form-label">E-Mail</label>
-                <input type="email" class="form-control" id="email" name="email"
-                       value="{{old("email")}}"
-                       placeholder="E-Mail Giriniz">
-                @error('email')
-                <span class="text-bg-danger">{{$message}}</span>
-                @enderror
 
-            </div>
             <div class="col-md-6 mb-3">
-                <label for="password" class="form-label">Şifre</label>
-                <input type="password" class="form-control" id="password" name="password"
-                       placeholder="Şifre Giriniz">
-                @error('password')
-                <span class="text-bg-danger">{{$message}}</span>
-                @enderror
+                <x-input label="E-Mail" type="email" placeholder="E-Mail Giriniz" field="email"/>
+            </div>
 
-            </div>
             <div class="col-md-6 mb-3">
-                <label for="password_confirmation" class="form-label">Şifre Tekrarı</label>
-                <input type="password" class="form-control" id="password_confirmation"
-                       name="password_confirmation"
-                       placeholder="Şifrenizi Tekrar Giriniz">
-                @error('password')
-                <span class="text-bg-danger">{{$message}}</span>
-                @enderror
+                <x-input label="Şifre" type="password" placeholder="Şifre Giriniz" field="password"/>
+            </div>
 
-            </div>
             <div class="col-md-6 mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="is_admin" name="is_admin"
-                    <label class="form-check-label" for="is_admin">
-                        Yetkili Kullanıcı
-                    </label>
-                </div>
+                <x-input label="Şifre Tekrarı" type="password" placeholder="Şifre Tekrarı" field="password_confirmation"/>
             </div>
+
             <div class="col-md-6 mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="is_active"
-                           name="is_active">
-                    <label class="form-check-label" for="is_active">
-                        Aktif Kullanıcı
-                    </label>
-                </div>
+                <x-checkbox label="Yetkili Kullanıcı" field="is_admin"/>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <x-checkbox label="Aktif Kullanıcı" field="is_active"/>
             </div>
         </div>
         <div class="row">

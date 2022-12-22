@@ -8,24 +8,13 @@
     <form action="{{url("/users/$user->user_id/change-password")}}" method="post">
         @csrf
         <div class="col-md-6 mb-3">
-            <label for="password" class="form-label">Şifre</label>
-            <input type="password" class="form-control" id="password" name="password"
-                   placeholder="Şifre Giriniz">
-            @error('password')
-            <span class="text-bg-danger">{{$message}}</span>
-            @enderror
-
+            <x-input label="Şifre" type="password" placeholder="Şifre Giriniz" field="password"/>
         </div>
+
         <div class="col-md-6 mb-3">
-            <label for="password_confirmation" class="form-label">Şifre Tekrarı</label>
-            <input type="password" class="form-control" id="password_confirmation"
-                   name="password_confirmation"
-                   placeholder="Şifrenizi Tekrar Giriniz">
-            @error('password')
-            <span class="text-bg-danger">{{$message}}</span>
-            @enderror
-
+            <x-input label="Şifre Tekrarı" type="password" placeholder="Şifre Tekrarı" field="password_confirmation"/>
         </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <button type="submit" class="btn btn-md btn-success"><i class="fa-solid fa-floppy-disk"></i>

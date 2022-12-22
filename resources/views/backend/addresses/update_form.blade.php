@@ -12,50 +12,24 @@
         <input type="hidden" name="address_id" value="{{$addr->address_id}}">
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="city" class="form-label">Şehir</label>
-                <input type="text" class="form-control" id="city" name="city" value="{{old('city',$addr->city)}}"
-                       placeholder="Şehir Giriniz">
-                @error('city')
-                <span class="text-bg-danger">{{$message}}</span>
-                @enderror
-
+                <x-input label="Şehir" placeholder="Şehir Giriniz" field="city" value="{{$addr->city}}" />
             </div>
+
             <div class="col-md-6 mb-3">
-                <label for="district" class="form-label">İlçe</label>
-                <input type="text" class="form-control" id="district" name="district"
-                       value="{{old('district',$addr->district)}}"
-                       placeholder="İlçe Giriniz">
-                @error('district')
-                <span class="text-bg-danger">{{$message}}</span>
-                @enderror
-
+                <x-input label="İlçe" placeholder="İlçe Giriniz" field="district" value="{{$addr->district}}" />
             </div>
-                <div class="col-md-6 mb-3">
-                    <label for="zipcode" class="form-label">Posta Kodu</label>
-                    <input type="text" class="form-control" id="zipcode" name="zipcode"
-                           value="{{old('zipcode',$addr->zipcode)}}"
-                           placeholder="Posta Kodu Giriniz">
-                    @error('zipcode')
-                    <span class="text-bg-danger">{{$message}}</span>
-                    @enderror
 
+                <div class="col-md-6 mb-3">
+                    <x-input label="Posta Kodu" placeholder="Posta Kodu Giriniz" field="zipcode" value="{{$addr->zipcode}}" />
                 </div>
                 <div class="col-md-6 mt-5 mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="is_default" name="is_default" value="1"
-                            {{$addr->is_default == 1 ? 'checked' : ''}}>
-                        <label class="form-check-label" for="is_default">
-                            Varsayılan
-                        </label>
-                    </div>
+                    <x-checkbox label="Varsayılan" field="is_default" checked="{{$addr->is_default == 1}}" />
                 </div>
 
             </div>
             <div class="col-md-12 mb-3">
-                <label for="address" class="form-label">Açık Adres</label>
-                <textarea type="text" class="form-control" id="address" name="address"
-                          placeholder="Açık Adres Giriniz">{{$addr->address}}
-                </textarea>
+                <x-textarea label="Açık Adres" placeholder="Açık Adres Giriniz" field="address"
+                            value="{{$addr->address}}"/>
             </div>
         </div>
         <div class="row">

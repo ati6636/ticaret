@@ -11,43 +11,28 @@
         <input type="hidden" name="user_id" value="{{$user->user_id}}">
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="name" class="form-label">Adı ve Soyadı</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{old('name',$user->name)}}"
-                       placeholder="Adı ve Soyadı Giriniz">
-                @error('name')
-                <span class="text-bg-danger">{{$message}}</span>
-                @enderror
+                <x-input label="Adı ve Soyadı" placeholder="Adı ve Soyadı Giriniz" field="name"
+                         value="{{$user->name}}"/>
+            </div>
 
-            </div>
             <div class="col-md-6 mb-3">
-                <label for="email" class="form-label">E-Mail</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{old('email',$user->email)}}"
-                       placeholder="E-Mail Giriniz">
-                @error('email')
-                <span class="text-bg-danger">{{$message}}</span>
-                @enderror
+                <x-input label="E-Mail" type="email" placeholder="E-Mail Giriniz" field="email"
+                         value="{{$user->email}}"/>
+            </div>
 
+            <div class=" col-md-6 mb-3">
+                <x-checkbox label="Yetkili Kullanıcı" field="is_admin" checked="{{$user->is_admin == 1}}"/>
             </div>
+
             <div class="col-md-6 mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" {{$user->is_admin == 1 ? 'checked' : ''}} id="is_admin" name="is_admin">
-                    <label class="form-check-label" for="is_admin">
-                        Yetkili Kullanıcı
-                    </label>
-                </div>
+                <x-checkbox label="Aktif Kullanıcı" field="is_active" checked="{{$user->is_active == 1}}"/>
             </div>
-            <div class="col-md-6 mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" {{$user->is_active == 1 ? 'checked' : ''}} id="is_active" name="is_active">
-                    <label class="form-check-label" for="is_active">
-                        Aktif Kullanıcı
-                    </label>
-                </div>
-            </div>
+        </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <button type="submit" class="btn btn-md btn-success "><i class="fa-solid fa-file-pen"></i> Güncelle</button>
+                <button type="submit" class="btn btn-md btn-success "><i class="fa-solid fa-file-pen"></i> Güncelle
+                </button>
             </div>
         </div>
     </form>

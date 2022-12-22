@@ -29,7 +29,7 @@ class AddressRequest extends FormRequest
             'city' => "required|min:3",
             'district' => 'required|min:3',
             'zipcode' => 'required|min:3',
-            'addresses' => 'required|min:30',
+            'address' => 'required|min:5',
         ];
     }
     public function messages()
@@ -43,8 +43,8 @@ class AddressRequest extends FormRequest
             'district.min' => 'Bu Alan En Az 3 Karakterden Oluşmalıdır.',
             'zipcode.required' => 'Bu Alan Zorunludur.',
             'zipcode.min' => 'Bu Alan En Az 3 Karakterden Oluşmalıdır.',
-            'addresses.required' => 'Bu Alan Zorunludur.',
-            'addresses.min' => 'Bu Alan En Az 30 Karakterden Oluşmalıdır.',
+            'address.required' => 'Bu Alan Zorunludur.',
+            'address.min' => 'Bu Alan En Az 5 Karakterden Oluşmalıdır.',
         ];
     }
 }

@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 class UserController extends Controller
 {
@@ -16,30 +19,30 @@ class UserController extends Controller
         $this->returnUrl = '/users';
     }
 
-    public function index()
+    public function index(): Factory|View|Application
     {
         $users = User::all();
         return view('backend.users.index', compact('users'));
     }
 
-    public function create()
+    public function create(): Factory|View|Application
     {
         return view('backend.users.insert_form');
     }
 
-    public function store(UserRequest $request, User $user)
+    public function store(UserRequest $request, User $user): Redirector|Application|RedirectResponse
     {
         $data = $this->prepare($request,$user->getFillable());
         $user->fill($data);
         $user->save();
         return redirect($this->returnUrl);
     }
-    public function edit(User $user)
+    public function edit(User $user): Factory|View|Application
     {
         return view('backend.users.update_form',compact('user'));
     }
 
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, User $user): Redirector|Application|RedirectResponse
     {
         $data = $this->prepare($request,$user->getFillable());
         $user->fill($data);
@@ -52,11 +55,11 @@ class UserController extends Controller
         return redirect($this->returnUrl);
 
     }
-    public function passwordForm(User $user)
+    public function passwordForm(User $user): Factory|View|Application
     {
         return view('backend.users.password_form',compact('user'));
     }
-    public function passwordPassword(UserRequest $request, User $user)
+    public function passwordPassword(UserRequest $request, User $user): Redirector|Application|RedirectResponse
     {
         $data = $this->prepare($request,$user->getFillable());
         $user->fill($data);

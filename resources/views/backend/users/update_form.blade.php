@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" {{$user->is_admin == 1 ? 'checked' : ''}} id="is_active" name="is_active">
+                    <input class="form-check-input" type="checkbox" value="1" {{$user->is_active == 1 ? 'checked' : ''}} id="is_active" name="is_active">
                     <label class="form-check-label" for="is_active">
                         Aktif Kullanıcı
                     </label>

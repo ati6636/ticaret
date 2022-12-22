@@ -1,7 +1,7 @@
 @extends("backend.shared.backend_theme")
 @section("title", "Kullanıcı Modülü")
-@section("subtitle",'Kullanıcılar' )
-@section("btn_url",url("/users/create"))
+@section("subtitle",'Kullanıcı Adresleri' )
+@section("btn_url",url("/users/$user->user_id/addresses/create"))
 @section("btn_label","Yeni Ekle")
 @section("btn_icon","fa-solid fa-plus")
 @section("content")
@@ -9,30 +9,36 @@
         <thead>
         <tr>
             <th scope="col">Sıra</th>
-            <th scope="col">Adı ve Soyadı</th>
-            <th scope="col">E-Mail</th>
-            <th scope="col">Durum</th>
+            <th scope="col">Şehir</th>
+            <th scope="col">İlçe</th>
+            <th scope="col">Posta Kodu</th>
+            <th scope="col">Açık Adres</th>
+            <th scope="col">Varsayılan</th>
             <th scope="col">İşlemler</th>
         </tr>
         </thead>
         <tbody>
-        @if(count($users) > 0)
-            @foreach($users as $user)
-                <tr id="{{$user->user_id}}">
+        @php
+            @endphp
+        @if(count($addrs) > 0)
+            @foreach($addrs as $addr)
+                <tr id="{{$addr->address_id}}">
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
+                    <td>{{$addr->city}}</td>
+                    <td>{{$addr->district}}</td>
+                    <td>{{$addr->zipcode}}</td>
+                    <td>{{$addr->address}}</td>
                     <td>
-                        @if($user->is_active == 1)
-                            <span class="badge rounded-pill text-bg-success">Aktif</span>
+                        @if($addr->is_default == 1)
+                            <span class="badge rounded-pill text-bg-success">Evet</span>
                         @else
-                            <span class="badge rounded-pill text-bg-danger">Pasif</span>
+                            <span class="badge rounded-pill text-bg-danger">Hayır</span>
                         @endif
                     </td>
                     <td>
                         <ul class="nav float-start">
                             <li class="nav-link">
-                                <a href="{{url("/users/$user->user_id/edit")}}"
+                                <a href="{{url("/users/$user->user_id/addresses/$addr->address_id/edit")}}"
                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa-solid fa-file-pen"></i>
                                     <span>Güncelle</span>
@@ -41,25 +47,16 @@
                         </ul>
                         <ul class="nav float-start">
                             <li class="nav-link">
-                                <form action="{{url("/users/$user->user_id")}}" method="post">
+                                <form action="{{url("/users/$user->user_id/addresses/$addr->address_id")}}" method="post">
                                     @csrf
-                                    @method('DELETE')
-                                    <button href="{{url("/users/$user->user_id")}}"
-                                            onclick="return confirm('Bu Kaydı Silmek İstediğinize Emin misiniz?')"
-                                            class="btn btn-sm btn-outline-danger">
+                                    @method("DELETE")
+                                    <button href="{{url("/users/$user->user_id/addresses/$addr->address_id")}}"
+                                       onclick="return confirm('Bu Kaydı Silmek İstediğinize Emin misiniz?')"
+                                       class="btn btn-sm btn-outline-danger list-item-delete">
                                         <i class="fa-solid fa-trash-can"></i>
                                         <span>Sil</span>
                                     </button>
                                 </form>
-                            </li>
-                        </ul>
-                        <ul class="nav float-start">
-                            <li class="nav-link">
-                                <a href="{{url("/users/$user->user_id/change-password")}}"
-                                   class="btn btn-sm btn-outline-secondary">
-                                    <i class="fa-solid fa-unlock"></i>
-                                    <span>Şifre Değiştir</span>
-                                </a>
                             </li>
                         </ul>
                     </td>
@@ -67,8 +64,8 @@
             @endforeach
         @else
             <tr>
-                <td class="text-center" colspan="5">
-                    <p>Herhangi Bir Kullanıcı Görüntülenemiyor</p>
+                <td class="text-center" colspan="7">
+                    <p>Herhangi Bir Adres Görüntülenemiyor</p>
                 </td>
             </tr>
         @endif

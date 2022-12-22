@@ -43,7 +43,7 @@
                             <li class="nav-link">
                                 <form action="{{url("/users/$user->user_id")}}" method="post">
                                     @csrf
-                                    @method('DELETE')
+                                    @method("DELETE")
                                     <button href="{{url("/users/$user->user_id")}}"
                                             onclick="return confirm('Bu Kaydı Silmek İstediğinize Emin misiniz?')"
                                             class="btn btn-sm btn-outline-danger">
@@ -59,6 +59,15 @@
                                    class="btn btn-sm btn-outline-secondary">
                                     <i class="fa-solid fa-unlock"></i>
                                     <span>Şifre Değiştir</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav float-start">
+                            <li class="nav-link">
+                                <a href="{{url("/users/$user->user_id/addresses")}}"
+                                   class="btn btn-sm btn-outline-dark">
+                                    <i class="fa-solid fa-address-book"></i>
+                                    <span>Adreslerim</span>
                                 </a>
                             </li>
                         </ul>

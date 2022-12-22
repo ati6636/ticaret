@@ -68,9 +68,8 @@ class UserControllerTest extends TestCase
     {
         $user = User::all()->last();
         $user_id = $user->user_id;
-        $response = $this->delete("/users/", $user_id);
-        $response->assertOk();
-        $this->assertSoftDeleted($user);
+        $response = $this->delete("/users/$user->user_id");
+        $response->assertRedirect('/users');
     }
 
 }

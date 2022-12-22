@@ -10,7 +10,7 @@ class Address extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $primaryKey = 'address_id';
+    protected $primaryKey = "address_id";
 
     protected $fillable = [
         "address_id",
@@ -18,7 +18,7 @@ class Address extends Model
         "city",
         "district",
         "zipcode",
-        "addresses",
+        "address",
         "is_default",
     ];
 }

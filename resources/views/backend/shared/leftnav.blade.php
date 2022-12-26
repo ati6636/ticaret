@@ -13,5 +13,17 @@
                 Kullanıcılar
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/categories">
+                <span class="align-text-bottom"><i class="fas fa-list"></i></span>
+                Kategoriler
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/products">
+                <span class="align-text-bottom"><i class="fas fa-boxes"></i></span>
+                Ürünler
+            </a>
+        </li>
     </ul>
 </div>

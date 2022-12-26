@@ -15,7 +15,7 @@ class Controller extends BaseController
     public $returnUrl;
     public $fileRepo;
 
-    public function prepare($request, $fillables)
+    public function prepare($request, $fillables): array
     {
         $data = array();
         foreach ($fillables as $fillable) {
@@ -25,6 +25,13 @@ class Controller extends BaseController
                 if (Str::of($fillable)->startsWith("is_")) {
                     $data[$fillable] = 0;
                 }
+            }
+        }
+        if (count($request->allFiles()) > 0) {
+            foreach ($request->allFiles() as $key => $value) {
+                $uploadedFile = $request->file($key);
+                $data[$key] = $uploadedFile->hashName();
+                $uploadedFile->storeAs($this->fileRepo, $data[$key]);
             }
         }
         return $data;
